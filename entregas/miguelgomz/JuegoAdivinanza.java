@@ -18,15 +18,15 @@ public class JuegoAdivinanza {
         System.out.print("Opcion: ");
         int dificultad = sc.nextInt();
 
-        if (d == 1) {
-            maxN = 50;
-            maxI = 10;
-        } else if (d == 2) {
-            maxN = 100;
-            maxI = 7;
-        } else if (d == 3) {
-            maxN = 200;
-            maxI = 8;
+        if (dificultad == 1) {
+            maximo = 50;
+            maximoIntentos = 10;
+        } else if (dificultad == 2) {
+            maximo = 100;
+            maximoIntentos = 7;
+        } else if (dificultad == 3) {
+            maximo = 200;
+            maximoIntentos = 8;
         } else {
             System.out.println("Opcion no valida, usando dificultad Normal.");
         }
@@ -41,10 +41,10 @@ public class JuegoAdivinanza {
         
         int[] histN = new int[maxI];
         String[] histP = new String[maxI];
-        int idx = 0; // Indice
+        int idx = 0; 
 
         while (intentosRealizados < maxI && !adivinado) {
-            System.out.println(); // espacio
+            System.out.println(); /
             System.out.println("Intento " + (intentosRealizados + 1) + "/" + maxI + ": ");
             System.out.println("[1] Adivinar [2] Pedir Pista");
             System.out.print("Opcion: ");
