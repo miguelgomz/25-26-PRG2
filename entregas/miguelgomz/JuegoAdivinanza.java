@@ -10,7 +10,7 @@ public class JuegoAdivinanza {
         int maximo = 100;
         int maximoIntentos = 10
 
-        System.out.println(); // espacio
+        System.out.println();
         System.out.println("Selecciona Dificultad:");
         System.out.println("1. Facil (1-50, 10 intentos)");
         System.out.println("2. Normal (1-100, 7 intentos)");
@@ -52,45 +52,45 @@ public class JuegoAdivinanza {
 
             String pistaActual = "";
 
-            if (opt_juego == 2) { // Pista
-                if (intentosRealizados >= maxI - 1) { // Ultimo intento no hay pista
+            if (opt_juego == 2) { 
+                if (intentosRealizados >= maxI - 1) { 
                     System.out.println("No puedes pedir mas pistas, es tu ultimo intento.");
                     pistaActual = "Pista denegada";
                 } else {
-                    intentosRealizados++; // La pista cuesta
+                    intentosRealizados++; 
                     System.out.print("PISTA: ");
-                    if (ns % 2 == 0) { // Duplicado
+                    if (ns % 2 == 0) { 
                         System.out.println("El numero es par.");
                     } else {
                         System.out.println("El numero es impar.");
                     }
-                    if (ns % 3 == 0) { // Otra
+                    if (ns % 3 == 0) { 
                         System.out.println("El numero es multiplo de 3.");
                     }
                     pistaActual = "Pista solicitada";
-                    // Guardar en historial
+                   
                     if (idx < maxI) {
-                        histN[idx] = 0; // 0 para pista
+                        histN[idx] = 0; 
                         histP[idx] = pistaActual;
                         idx++;
                     }
                 }
-                continue; // Volver a empezar
-            } else if (opt_juego == 1) { // Adivinar
+                continue; 
+            } else if (opt_juego == 1) { 
                 System.out.print("Tu numero: ");
                 int n = sc.nextInt();
                 
-                // Valida rango
+           
                 if (n < minN || n > maxN) {
                     System.out.println("El numero debe estar entre " + minN + " y " + maxN);
                     pistaActual = "Fuera de rango";
-                    // Guardar en historial
+                   
                     if (idx < maxI) {
                         histN[idx] = n;
                         histP[idx] = pistaActual;
                         idx++;
                     }
-                    continue; // Saltar intento
+                    continue; 
                 }
                 
                 intentosRealizados++;
@@ -108,7 +108,7 @@ public class JuegoAdivinanza {
                     } else {
                         pistaActual = "MAYOR";
                     }
-                } else { // n > ns
+                } else { 
                     System.out.println("El numero es MENOR");
                     if (n > ns - 5 && n < ns + 5) { // Cerca
                         System.out.println("¡Muy cerca!");
@@ -118,7 +118,7 @@ public class JuegoAdivinanza {
                     }
                 }
                 
-                // Guardar en historial
+            
                 if (idx < maxI) {
                     histN[idx] = n;
                     histP[idx] = pistaActual;
@@ -127,17 +127,17 @@ public class JuegoAdivinanza {
             } else {
                 System.out.println("Opcion invalida.");
                 pistaActual = "Opcion invalida";
-                // No hay intento consumido
+                
             }
         }
 
         if (!adivinado) {
-            System.out.println(); // espacio
+            System.out.println(); 
             System.out.println("¡Se acabaron los intentos!");
             System.out.println("El numero era: " + ns);
         }
 
-        System.out.println(); // espacio
+        System.out.println(); 
         System.out.println("Historial de Intentos");
         for (int k = 0; k < idx; k++) {
             System.out.println((k + 1) + ". " + histN[k] + " -> " + histP[k]);
@@ -146,7 +146,7 @@ public class JuegoAdivinanza {
             System.out.println("(No hubo intentos)");
         }
 
-        System.out.println(); // espacio
+        System.out.println(); 
         System.out.println("Fin del juego");
         sc.close();
     }
