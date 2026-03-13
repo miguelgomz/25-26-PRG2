@@ -1,3 +1,6 @@
+import java.util.Random;
+import java.util.Scanner
+
 public class Buscaminas {
     private static final int ALTO = 5;
     private static final int ANCHO = 7;
