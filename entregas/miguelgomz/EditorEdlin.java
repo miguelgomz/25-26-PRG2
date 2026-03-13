@@ -12,6 +12,10 @@ public class EditorEdlin {
         for (int i = 0; i < documento.length; i++) {
             documento[i] = "";
         }
+        while (!entradaUsuario.equalsIgnoreCase("S")) {
+            renderizarInterfaz(); 
+            System.out.print("Comando: ");
+            entradaUsuario = lector.nextLine().toUpperCase();
 
        if (entradaUsuario.equals("L")) {
                 System.out.print("Número de fila a activar (0-9): ");
@@ -38,6 +42,7 @@ public class EditorEdlin {
                     System.out.println("Error: Índice de destino inválido.");
                 }
             }
+        }
         System.out.println("Cerrando el editor...");
         lector.close();
     }
