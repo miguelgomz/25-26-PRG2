@@ -6,9 +6,9 @@ public class JuegoAdivinanza {
 
         System.out.println("Juego de Adivinanza - Adivina el Numero Secreto");
         
-        int minN = 1;
-        int maxN = 100;
-        int maxI = 10; // Max intentos
+         int minimo = 1;
+        int maximo = 100;
+        int maximoIntentos = 10
 
         System.out.println(); // espacio
         System.out.println("Selecciona Dificultad:");
@@ -16,7 +16,7 @@ public class JuegoAdivinanza {
         System.out.println("2. Normal (1-100, 7 intentos)");
         System.out.println("3. Dificil (1-200, 8 intentos)");
         System.out.print("Opcion: ");
-        int d = sc.nextInt();
+        int dificultad = sc.nextInt();
 
         if (d == 1) {
             maxN = 50;
