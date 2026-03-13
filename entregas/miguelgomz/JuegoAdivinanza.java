@@ -34,11 +34,11 @@ public class JuegoAdivinanza {
         System.out.println(); // espacio
         System.out.println("Adivina el numero entre " + minN + " y " + maxN);
 
-        int ns = (int)(Math.random() * (maxN - minN + 1)) + minN;
+         int ns = generarNumeroSecreto(minN, maxN);
         int intentosRealizados = 0;
         boolean adivinado = false;
 
-        // Historial
+        
         int[] histN = new int[maxI];
         String[] histP = new String[maxI];
         int idx = 0; // Indice
