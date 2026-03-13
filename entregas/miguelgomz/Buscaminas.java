@@ -1,9 +1,11 @@
 public class Buscaminas {
     private static final int ALTO = 5;
     private static final int ANCHO = 7;
+    private static final int CANTIDAD_MINAS = 5;
     private static final char VACIO = '-';
 
     private char[][] malla;
+    private boolean[][] ubicacionMinas;
 
     public static void main(String[] args) {
         new Buscaminas().ejecutar();
@@ -11,12 +13,14 @@ public class Buscaminas {
 
     public void ejecutar() {
         prepararMalla();
+        sembrarMinas();
         System.out.println("--- BUSCAMINAS v1.0 ---");
         dibujarMalla();
     }
 
     private void prepararMalla() {
         malla = new char[ALTO][ANCHO];
+        ubicacionMinas = new boolean[ALTO][ANCHO];
         for (int f = 0; f < ALTO; f++) {
             for (int c = 0; c < ANCHO; c++) {
                 malla[f][c] = VACIO;
