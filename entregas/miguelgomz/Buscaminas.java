@@ -1,11 +1,74 @@
 import java.util.Random;
 import java.util.Scanner;
 
+ private static final int VIDAS_MAXIMAS = 3;
+ private int explosiones = 0;
+ private int celdasLiberadas = 0;
+ private boolean juegoTerminado = false;
+
+ private static final int TOTAL_MINAS = 5;
+    private boolean[][] mapaMinas;
+    private Scanner scanner = new Scanner(System.in);
+    private static final int VIDAS_MAXIMAS = 3;
+    private int explosiones = 0;
+    private int celdasLiberadas = 0;
+    private boolean juegoTerminado = false;
+
+    private char[][] tableroVisual;
+
+    public void iniciar() {
+        inicializarTablero();
+        colocarMinas();
+        
+        while (!juegoTerminado) {
+            imprimirTablero();
+            realizarJugada();
+        }
+    }
+
+    private void inicializarTablero() {
+    }
+
+    private void procesarCelda(int f, int c) {
+        if (tableroVisual[f][c] != CELDA_OCULTA) {
+            System.out.println("¡Ya revisaste esta casilla!");
+            return;
+        }
+
+        if (mapaMinas[f][c]) {
+            System.out.println("¡MINA!");
+            tableroVisual[f][c] = '*';
+            explosiones++;
+        } else {
+            System.out.println("¡Libre!");
+            tableroVisual[f][c] = '.';
+            celdasLiberadas++;
+        }
+
+        verificarFinal();
+    }
+
+    private void verificarFinal() {
+        int totalSeguras = (FILAS * COLUMNAS) - TOTAL_MINAS;
+        
+        if (explosiones >= VIDAS_MAXIMAS) {
+            imprimirTablero();
+            System.out.println("PERDISTE. Fin del juego.");
+            juegoTerminado = true;
+        } else if (celdasLiberadas == totalSeguras) {
+            imprimirTablero();
+            System.out.println("¡GANASTE! Tablero limpio.");
+            juegoTerminado = true;
+        }
+    }                                                                                                                                                                                                                                          
+
+
 public class Buscaminas {
     private static final int FILAS = 5;
     private static final int COLUMNAS = 7;
     private static final int TOTAL_MINAS = 5;
     private static final char CELDA_OCULTA = '-';
+    private static final int VIDAS_MAXIMAS = 3;
 
     private char[][] malla;
     private boolean[][] ubicacionMinas;
@@ -15,12 +78,16 @@ public class Buscaminas {
         new Buscaminas().ejecutar();
     }
 
-  public void  ejecutar() {
+     public void ejecutar() {
         prepararMalla();
         sembrarMinas();
-        System.out.println("--- BUSCAMINAS v1.1 ---");
-        dibujarMalla();
-        realizarJugada(); 
+        System.out.println("BUSCAMINAS");
+        
+        while (!juegoTerminado) {
+            dibujarMalla();
+            System.out.println("Vidas usadas: " + explosiones + "/" + VIDAS_MAXIMAS);
+            realizarJugada();
+        }
     }
 
     private void prepararMalla() {
@@ -72,15 +139,38 @@ public class Buscaminas {
             } else {
                 scanner.next(); 
             }
-            System.out.println("Error: Valor inválido.");
+            System.out.println("Valor inválido.");
         }
     }
 
     private void procesarCelda(int f, int c) {
+     if (malla[f][c] != CELDA_OCULTA) {
+        System.out.println("¡Ya revisaste esta casilla!");
+        return;
+     }
+
         if (ubicacionMinas[f][c]) {
-            System.out.println("¡BOOM! Había una mina en [" + (f+1) + "," + (c+1) + "]");
+            System.out.println("¡ADIOOS! Has pisado una mina.");
+       malla[f][c] = '*'; 
+        explosiones++;
         } else {
-            System.out.println("Celda [" + (f+1) + "," + (c+1) + "] limpia. ¡Suerte!");
+            System.out.println("Celda limpia.");
+         malla[f][c] = '.'; 
+         celdasLiberadas++;
+        }
+     private void verificarFinal() {
+        int totalSeguras = (FILAS * COLUMNAS) - TOTAL_MINAS;
+        
+        if (explosiones >= VIDAS_MAXIMAS) {
+            dibujarMalla();
+            System.out.println("GAME OVER. Pisaste " + VIDAS_MAXIMAS + " minas.");
+            juegoTerminado = true;
+        } else if (celdasLiberadas == totalSeguras) {
+            dibujarMalla();
+            System.out.println("¡GG! Has despejado todo el tablero.");
+            juegoTerminado = true;
         }
     }
+    }
 }
+
