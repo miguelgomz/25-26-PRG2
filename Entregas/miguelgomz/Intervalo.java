@@ -67,4 +67,26 @@ class Intervalo {
         double sup = Math.max(getSup(), i.getSup());
         return new Intervalo((inf + sup) / 2, sup - inf);
     }
-}
+    public static void main(String[] args) {
+        Intervalo i1 = new Intervalo(5, 10);
+        
+        System.out.print("Intervalo creado: ");
+        i1.mostrar();
+
+        System.out.println("Dividiendo el intervalo en 5 trozos:");
+        Intervalo[] trozos = i1.trocear(5);
+        for (int i = 0; i < trozos.length; i++) {
+            System.out.print("Trozo " + (i + 1) + ": ");
+            trozos[i].mostrar();
+        }
+
+        System.out.println("\nProbando si el punto 3.5 está incluido:");
+        if (i1.incluye(3.5)) {
+            System.out.println("¡Sí lo incluye!");
+        } else {
+            System.out.println("No lo incluye.");
+        }
+    }
+   
+    }
+
