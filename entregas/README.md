@@ -1,6 +1,6 @@
 # Proyecto: Implementación de la Clase Fraccion en Java
 
-Este proyecto consiste en una biblioteca para el manejo de fracciones matemáticas, diseñada bajo los principios de encapsulamiento e inmutabilidad. La clase permite realizar operaciones aritméticas garantizando siempre que los resultados estén simplificados.
+Biblioteca para poder hacer de fracciones matemáticas, los principios de encapsulamiento dados en clase  La clase permite realizar operaciones esta siempre que los resultados estén simplificados.
 
 ---
 
