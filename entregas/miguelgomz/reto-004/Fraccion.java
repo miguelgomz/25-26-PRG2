@@ -1,6 +1,6 @@
-public class Fraccion {
-    private int numerador;
-    private int denominador;
+class Fraccion {
+    private final int numerador;
+    private final int denominador;
 
     public Fraccion() {
         this.numerador = 0;
@@ -8,13 +8,16 @@ public class Fraccion {
     }
 
     public Fraccion(int numerador, int denominador) {
-        this.numerador = numerador;
-        if (denominador == 0) {
-            this.denominador = 1;
-        } else {
-            this.denominador = denominador;
+        assert denominador != 0 : "El denominador no puede ser cero.";
+        
+        if (denominador < 0) {
+            numerador = -numerador;
+            denominador = -denominador;
         }
-        simplificar();
+
+        int mcd = calcularMCD(numerador, denominador);
+        this.numerador = numerador / mcd;
+        this.denominador = denominador / mcd;
     }
 
     private int calcularMCD(int a, int b) {
@@ -28,76 +31,47 @@ public class Fraccion {
         return a;
     }
 
-    private void simplificar() {
-        int mcd = calcularMCD(numerador, denominador);
-        numerador /= mcd;
-        denominador /= mcd;
-        if (denominador < 0) {
-            numerador = -numerador;
-            denominador = -denominador;
-        }
+    public Fraccion sumar(Fraccion otra) {
+        int numerador = (this.numerador * otra.denominador) + (otra.numerador * this.denominador);
+        int denominador = this.denominador * otra.denominador;
+        return new Fraccion(numerador, denominador);
     }
 
-    public void sumar(Fraccion otra) {
-        this.numerador = (this.numerador * otra.denominador) + (otra.numerador * this.denominador);
-        this.denominador = this.denominador * otra.denominador;
-        simplificar();
+    public Fraccion restar(Fraccion otra) {
+        int numerador = (this.numerador * otra.denominador) - (otra.numerador * this.denominador);
+        int denominador = this.denominador * otra.denominador;
+        return new Fraccion(numerador, denominador);
     }
 
-    public void restar(Fraccion otra) {
-        this.numerador = (this.numerador * otra.denominador) - (otra.numerador * this.denominador);
-        this.denominador = this.denominador * otra.denominador;
-        simplificar();
+    public Fraccion multiplicar(Fraccion otra) {
+        int numerador = this.numerador * otra.numerador;
+        int denominador = this.denominador * otra.denominador;
+        return new Fraccion(numerador, denominador);
     }
 
-    public void multiplicar(Fraccion otra) {
-        this.numerador *= otra.numerador;
-        this.denominador *= otra.denominador;
-        simplificar();
+    public Fraccion dividir(Fraccion otra) {
+        int numerador = this.numerador * otra.denominador;
+        int denominador = this.denominador * otra.numerador;
+        return new Fraccion(numerador, denominador);
     }
 
-    public void dividir(Fraccion otra) {
-        this.numerador *= otra.denominador;
-        this.denominador *= otra.numerador;
-        simplificar();
+    public Fraccion inversa() {
+        return new Fraccion(this.denominador, this.numerador);
     }
 
-    public void potenciar(int exponente) {
-        this.numerador = (int) Math.pow(this.numerador, exponente);
-        this.denominador = (int) Math.pow(this.denominador, exponente);
-        simplificar();
+    public Fraccion opuesta() {
+        return new Fraccion(-this.numerador, this.denominador);
     }
 
-    public void invertir() {
-        if (numerador != 0) {
-            int temp = numerador;
-            numerador = denominador;
-            denominador = temp;
-            simplificar();
-        }
-    }
-
-    public void oponer() {
-        this.numerador = -this.numerador;
-    }
-
-    public double aDecimal() {
+    public double toDouble() {
         return (double) numerador / denominador;
     }
 
-    public Fraccion clonar() {
-        return new Fraccion(this.numerador, this.denominador);
-    }
-
-    public boolean esMayor(Fraccion otra) {
-        return (double) this.numerador / this.denominador > (double) otra.numerador / otra.denominador;
-    }
-
-    public boolean esMenor(Fraccion otra) {
-        return (double) this.numerador / this.denominador < (double) otra.numerador / otra.denominador;
-    }
-
-    public boolean equals(Fraccion otra) {
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Fraccion)) return false;
+        Fraccion otra = (Fraccion) obj;
         return this.numerador == otra.numerador && this.denominador == otra.denominador;
     }
 
