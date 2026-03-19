@@ -8,7 +8,9 @@ class Fraccion {
     }
 
     public Fraccion(int numerador, int denominador) {
-        assert denominador != 0 : "El denominador no puede ser cero.";
+        if (denominador == 0) {
+            denominador = 1;
+        }
         
         if (denominador < 0) {
             numerador = -numerador;
@@ -67,16 +69,12 @@ class Fraccion {
         return (double) numerador / denominador;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof Fraccion)) return false;
-        Fraccion otra = (Fraccion) obj;
+    public boolean equals(Fraccion otra) {
         return this.numerador == otra.numerador && this.denominador == otra.denominador;
     }
 
-    @Override
     public String toString() {
         return numerador + "/" + denominador;
     }
+}
 }
