@@ -26,4 +26,21 @@ public class Carrera {
         pista.mostrarPista(caballos);
         mostrarResultadoFinal();
     }
+    public void jugar() {
+        boolean carreraTerminada = false;
+
+        while (!carreraTerminada) {
+            pista.mostrarPista(caballos);
+
+            for (Caballo caballo : caballos) {
+                caballo.correr(pista.getLongitud());
+                if (caballo.getAvance() >= pista.getLongitud() - 1) {
+                    carreraTerminada = true;
+                }
+            }
+        }
+
+        pista.mostrarPista(caballos);
+        mostrarResultadoFinal();
+    }
  
